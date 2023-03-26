@@ -20,8 +20,7 @@ jobs:
       run: mvn clean install -DskipTests -Djib.skip
 
     - name: Run the test
-      run: mvn test -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
+      run: mvn test -DfailIfNoTests=false -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
 
     - name: Run NonDex for flaky tests detection
-      run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
-
+      run: mvn edu.illinois:nondex-maven
