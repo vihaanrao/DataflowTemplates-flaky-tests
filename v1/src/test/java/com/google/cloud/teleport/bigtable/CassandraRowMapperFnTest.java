@@ -126,20 +126,11 @@ public class CassandraRowMapperFnTest extends CassandraBaseTest {
     Schema schema = Schema.builder().addNullableField("col", FieldType.INT32).build();
     Row expected = Row.withSchema(schema).addValue(value).build();
 
-<<<<<<< HEAD
-    // Map the resultSet to Apache Beam Row using the cassandraRowMapper
-    Row resultRow = cassandraRowMapper.map(resultSet).next();
-
-    // Compare float values with a small tolerance
-    float delta = 1e-6f;
-    assertEquals((float) expected.getValue("col"), (float) resultRow.getValue("col"), delta);
-=======
     com.datastax.driver.core.Row cassandraRow = resultSet.one();
 
     // Compare float values with a small tolerance
     float delta = 1e-6f;
     assertEquals(expected.getValue("col"), cassandraRow.getFloat("col"), delta);
->>>>>>> origin/flaky-test
   }
 
   @Test
