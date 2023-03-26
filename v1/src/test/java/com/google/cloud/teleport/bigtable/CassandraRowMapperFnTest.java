@@ -144,7 +144,7 @@ public class CassandraRowMapperFnTest extends CassandraBaseTest {
 
     // Compare float values with a small tolerance
     float delta = 1e-6f;
-    assertEquals(expected.getFloat("col"), resultSet.getFloat("col"), delta);
+    assertEquals(expected.getValue("col"), mappedRow.getValue("col"), delta);
   }
 
   @Test
