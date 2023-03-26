@@ -23,4 +23,4 @@ jobs:
       run: mvn test -DfailIfNoTests=false -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
 
     - name: Run NonDex for flaky tests detection
-      run: mvn edu.illinois:nondex-maven-plugin:1.1.2:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn --settings settings.xml
+      run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn --settings settings.xml
