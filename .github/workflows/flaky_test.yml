@@ -18,9 +18,16 @@ jobs:
 
     - name: Build project
       run: mvn clean install -DskipTests -Djib.skip
-
+      
     - name: Run the test
       run: mvn test -DfailIfNoTests=false -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
 
     - name: Run NonDex for flaky tests detection
-      run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn -DfailIfNoTests=false
+      run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn -DfailIfNoTests=false    
+     
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: /home/runner/work/DataflowTemplates-flaky-tests/DataflowTemplates-flaky-tests/v1/.nondex/slRz8UiZ9BAtjNgCBoQ3YSkqXp5ZxpckwIv68pkJzzo=*/TEST-*.xml
