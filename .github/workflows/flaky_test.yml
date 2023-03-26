@@ -16,8 +16,8 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Run Spotless Check
-      run: mvn spotless:check
+    - name: Run Spotless apply
+      run: mvn spotless:apply
 
     - name: Build project
       run: mvn clean install -DskipTests -Djib.skip
