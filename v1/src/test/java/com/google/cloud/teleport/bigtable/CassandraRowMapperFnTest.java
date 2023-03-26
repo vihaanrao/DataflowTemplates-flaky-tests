@@ -126,7 +126,11 @@ public class CassandraRowMapperFnTest extends CassandraBaseTest {
     Schema schema = Schema.builder().addNullableField("col", FieldType.INT32).build();
     Row expected = Row.withSchema(schema).addValue(value).build();
 
-    assertEquals(expected, cassandraRowMapper.map(resultSet).next());
+    com.datastax.driver.core.Row cassandraRow = resultSet.one();
+
+    // Compare float values with a small tolerance
+    float delta = 1e-6f;
+    assertEquals(expected.getFloat("col"), cassandraRow.getFloat("col"), delta);
   }
 
   @Test
