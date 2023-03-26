@@ -1,6 +1,6 @@
 name: Flaky Test Detection
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   test:
@@ -17,7 +17,7 @@ jobs:
         distribution: 'adopt'
 
     - name: Build project
-      run: mvn clean install -DskipTests
+      run: mvn clean install -DskipTests -Djib.skip
 
     - name: Run the test
       run: mvn test -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
