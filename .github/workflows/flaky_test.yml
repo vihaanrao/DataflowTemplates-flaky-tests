@@ -1,6 +1,6 @@
 name: Flaky Test Detection
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -16,8 +16,11 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Build and test
-      run: mvn clean install -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
+    - name: Build project
+      run: mvn clean install -DskipTests
+
+    - name: Run the test
+      run: mvn test -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
 
     - name: Run NonDex for flaky tests detection
       run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -DnondexRuns=10 -Dtest=com.google.cloud.teleport.bigtable.CassandraRowMapperFnTest#testMapFloatColumn
