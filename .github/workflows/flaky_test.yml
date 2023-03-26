@@ -31,3 +31,11 @@ jobs:
       with:
         name: test-results
         path: /home/runner/work/DataflowTemplates-flaky-tests/DataflowTemplates-flaky-tests/v1/.nondex/slRz8UiZ9BAtjNgCBoQ3YSkqXp5ZxpckwIv68pkJzzo=*/TEST-*.xml
+        
+    - name: Print test results
+      run: |
+        find . -type f -name "TEST-*.xml" -print0 | while IFS= read -r -d '' file; do
+        echo "Printing test results for file: $file"
+        cat "$file"
+        done
+
